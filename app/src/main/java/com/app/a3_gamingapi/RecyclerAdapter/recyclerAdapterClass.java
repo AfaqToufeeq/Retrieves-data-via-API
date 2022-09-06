@@ -10,15 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.app.a3_gamingapi.R;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class recyclerAdapterClass extends RecyclerView.Adapter<recyclerAdapterClass.DataViewHolder> implements Filterable {
 
     List<dataClass> mDataList;
+    List<dataClass> mDataList2;
 
     public recyclerAdapterClass(List<dataClass> mDataList) {
         this.mDataList = mDataList;
+        mDataList2 = new ArrayList<>(mDataList);
     }
 
     @Override
@@ -44,11 +46,6 @@ public class recyclerAdapterClass extends RecyclerView.Adapter<recyclerAdapterCl
         return mDataList.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return null;
-    }
-
     public class DataViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
@@ -63,4 +60,41 @@ public class recyclerAdapterClass extends RecyclerView.Adapter<recyclerAdapterCl
             defenseTV=itemView.findViewById(R.id.defenseTV);
         }
     }
+
+    //Filteration Applied!!!
+    @Override
+    public Filter getFilter() {
+        return filterList;
+    }
+
+    public Filter filterList = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<dataClass> filteredList2 = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList2.addAll(mDataList2);
+            }
+            else{
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for(dataClass item : mDataList2)
+                {
+                    if(item.getNameData().toLowerCase().contains(filterPattern))
+                    {
+                        filteredList2.add(item);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList2;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mDataList.clear();
+            mDataList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }

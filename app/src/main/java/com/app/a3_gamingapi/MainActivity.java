@@ -1,10 +1,16 @@
 package com.app.a3_gamingapi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import com.app.a3_gamingapi.RecyclerAdapter.dataClass;
 import com.app.a3_gamingapi.RecyclerAdapter.recyclerAdapterClass;
@@ -78,5 +84,30 @@ public class MainActivity extends AppCompatActivity {
         adapter = new recyclerAdapterClass(dataList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+    
+    //Option Menu for Filteration the Data
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_item,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_Action);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s.toString());
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

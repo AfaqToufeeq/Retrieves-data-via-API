@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/drawable/btn_greenshade.xml" value="0.17" />
+        <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/font/baloo.xml" value="0.234375" />
         <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/layout/custom_layout.xml" value="0.25257731958762886" />
+        <entry key="..\:/Users/afaqt/AndroidStudioProjects/A3_GamingApi/app/src/main/res/menu/menu_item.xml" value="0.1" />
       </map>
     </option>
   </component>
